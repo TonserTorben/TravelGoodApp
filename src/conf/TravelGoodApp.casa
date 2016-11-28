@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://lameduck.dtu/" xmlns:ns2="http://niceview.dtu/" xmlns:ns3="http://enterprise.netbeans.org/bpel/TravelGoodBPEL/travelGoodBPEL" xmlns:ns4="http://travelgood.ws" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="AirlineReservationServicePort" interface-name="ns1:AirlineReservationService" name="endpoint1" service-name="ns1:AirlineReservationService"/>
+        <endpoint endpoint-name="HotelReservationServicePort" interface-name="ns2:HotelReservationService" name="endpoint2" service-name="ns2:HotelReservationService"/>
+        <endpoint display-name="PartnerLink1" endpoint-name="TravelGoodBPELPortTypeRole_myRole" file-path="travelGoodBPEL.bpel" interface-name="ns4:TravelGoodBPELPortType" name="endpoint3" process-name="travelGoodBPEL" service-name="ns3:PartnerLink1"/>
+        <endpoint display-name="Airline" endpoint-name="AirlineReservationServiceRole_partnerRole" file-path="travelGoodBPEL.bpel" interface-name="ns1:AirlineReservationService" name="endpoint4" process-name="travelGoodBPEL" service-name="ns3:Airline"/>
+        <endpoint display-name="hotel" endpoint-name="HotelReservationServiceRole_partnerRole" file-path="travelGoodBPEL.bpel" interface-name="ns2:HotelReservationService" name="endpoint5" process-name="travelGoodBPEL" service-name="ns3:hotel"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="TravelGoodBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="TravelGoodApp-TravelGoodBPEL" unit-name="TravelGoodBPEL" unknown="false" x="198" y="93">
+            <provides endpoint="endpoint3"/>
+            <consumes endpoint="endpoint4"/>
+            <consumes endpoint="endpoint5"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="TravelGoodApp-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port x="67" y="118">
+                    <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/LameDuck/AirlineReservationService.wsdl#xpointer(/definitions/service[@name='AirlineReservationService']/port[@name='AirlineReservationServicePort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+                <port x="67" y="39">
+                    <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/NiceView/HotelReservationService.wsdl#xpointer(/definitions/service[@name='HotelReservationService']/port[@name='HotelReservationServicePort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint4" provider="endpoint1" state="unchanged"/>
+        <connection consumer="endpoint5" provider="endpoint2" state="unchanged"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/LameDuck/AirlineReservationService.wsdl#xpointer(/definitions/portType[@name='AirlineReservationService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/NiceView/HotelReservationService.wsdl#xpointer(/definitions/portType[@name='HotelReservationService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/TravelGoodBPEL.wsdl#xpointer(/definitions/portType[@name='TravelGoodBPELPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/LameDuck/AirlineReservationService.wsdl#xpointer(/definitions/binding[@name='AirlineReservationServicePortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/NiceView/HotelReservationService.wsdl#xpointer(/definitions/binding[@name='HotelReservationServicePortBinding'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/LameDuck/AirlineReservationService.wsdl#xpointer(/definitions/service[@name='AirlineReservationService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TravelGoodBPEL/localhost_8080/NiceView/HotelReservationService.wsdl#xpointer(/definitions/service[@name='HotelReservationService'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>
